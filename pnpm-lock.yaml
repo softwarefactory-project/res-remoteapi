@@ -1,0 +1,93 @@
+dependencies:
+  '@rescript/react': 0.10.1_bs-platform@8.4.2+react@16.14.0
+  bs-fetch: 0.6.2
+  decco: 1.3.0_bs-platform@8.4.2
+  remotedata-re: 1.1.2_bs-platform@8.4.2
+devDependencies:
+  bs-platform: 8.4.2
+  react: 16.14.0
+lockfileVersion: 5.2
+packages:
+  /@rescript/react/0.10.1_bs-platform@8.4.2+react@16.14.0:
+    dependencies:
+      bs-platform: 8.4.2
+      react: 16.14.0
+    dev: false
+    peerDependencies:
+      bs-platform: ^8.3.0
+      react: ^16.8.1
+      react-dom: ^16.8.1
+    resolution:
+      integrity: sha512-5eIfGnV1yhjv03ktK6fQ6iEfsZKXKXXrq5hx4+ngEY4R/RU8o/oH9ne375m9RJMugV/jsE8hMoEeSSg2YQy3Ag==
+  /bs-fetch/0.6.2:
+    dev: false
+    resolution:
+      integrity: sha512-VXEjp8kY3vHPckaoy3d96Bx0KYjJAPLNISBwfpwMN26K6DtuZYwI2HKhx7zeHBajz1bRArfx7O8OOLcdtujMvg==
+  /bs-platform/8.4.2:
+    dev: true
+    hasBin: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-9q7S4/LLV/a68CweN382NJdCCr/lOSsJR3oQYnmPK98ChfO/AdiA3lYQkQTp6T+U0I5Z5RypUAUprNstwDtMDQ==
+  /decco/1.3.0_bs-platform@8.4.2:
+    dependencies:
+      bs-platform: 8.4.2
+    dev: false
+    peerDependencies:
+      bs-platform: 6 || 7 || 8
+    resolution:
+      integrity: sha512-pednHg+Skby+sw193hbHTRLihZskmXrPsVMlqL9XpuLm+HfwMgS76lFRAkTGAi3435q0TBygTpt8McVTyk4Sfw==
+  /js-tokens/4.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==
+  /loose-envify/1.4.0:
+    dependencies:
+      js-tokens: 4.0.0
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
+  /object-assign/4.1.1:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=
+  /prop-types/15.7.2:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      react-is: 16.13.1
+    dev: true
+    resolution:
+      integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
+  /react-is/16.13.1:
+    dev: true
+    resolution:
+      integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+  /react/16.14.0:
+    dependencies:
+      loose-envify: 1.4.0
+      object-assign: 4.1.1
+      prop-types: 15.7.2
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==
+  /remotedata-re/1.1.2_bs-platform@8.4.2:
+    dependencies:
+      bs-platform: 8.4.2
+    dev: false
+    peerDependencies:
+      bs-platform: ^7.1.1
+    resolution:
+      integrity: sha512-tYnxgCBMrAbldMSPftn3QfovV05J2LqyZe9BdWu2JcHxYQbKF7jZItpurI3oZPoWLR/pPQLd2krmkJ/UfOt1Dw==
+specifiers:
+  '@rescript/react': ^0.10.1
+  bs-fetch: ^0.6.2
+  bs-platform: ^8.2.0
+  decco: ^1.3.0
+  react: ^16.14.0
+  remotedata-re: ^1.1.2
