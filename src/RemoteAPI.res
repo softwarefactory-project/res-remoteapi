@@ -214,7 +214,10 @@ module Hook = (CLIENT: HTTPClient) => {
     let (state, dispatch) = useGet(url, decoder)
 
     // Trigger get when not asked
-    React.useEffect1(getWhenNeeded(state, dispatch), [url])
+    React.useEffect1(() => {
+      dispatch()
+      None
+    }, [url])
     state
   }
 
