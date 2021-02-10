@@ -3,7 +3,13 @@
 Remote API React hook for rescript
 
 ```
-pnpm add @softwarefactory-project/res-remoteapi
+npm add @softwarefactory-project/res-remoteapi
+```
+
+When using `pnpm`, you also need to add the dependencies to your package:
+
+```
+pnpm add bs-fetch remotedata-re @rescript/react react@^16.14.0
 ```
 
 Add to your `bsconfig.json`:
