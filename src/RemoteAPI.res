@@ -178,19 +178,15 @@ module Hook = (CLIENT: HTTPClient) => {
     )
   }
 
-  let putOrPost = (action, decode: option<decoder_t<'a>>, dispatch: dispatch_t<'a>) => {
+  let putOrPost = (action, decode: decoder_t<'a>, dispatch: dispatch_t<'a>) => {
     dispatch(NetworkRequestBegin)
     open Js.Promise
     action() |> then_(resp =>
       switch resp {
       | Ok(mjson) =>
-        switch decode {
-        | Some(decode) =>
           mjson
           ->note("Missing expected JSON from the response!")
           ->Result.flatMap(json => json->decode->deccoErrorToResponse)
-        | None => Ok()
-        }
         ->responseToAction
         ->dispatch
         ->Ok
@@ -221,14 +217,12 @@ module Hook = (CLIENT: HTTPClient) => {
     state
   }
 
-  let usePost = (url: string, encoder: encoder_t<'a>, decoder: decoder_t<'b>): (
-    state_t<'b>,
-    'a => unit,
-  ) => {
+  let usePost = (url: string, encoder: encoder_t<'a>, decoder: decoder_t<'b>): posthook_t<'a, 'b>
+  => {
     let (state, setState) = React.useState(() => RemoteData.NotAsked)
     let set_state = s => setState(_prevState => s)
     let dispatch = data =>
-      post(url, data->encoder->Some, decoder->Some, r =>
+      post(url, data->encoder->Some, decoder, r =>
         state->updateRemoteData(r)->set_state
       )->ignore
     (state, dispatch)
