@@ -34,11 +34,16 @@ module BsFetch: HTTPClient = {
   let handleAPICallError = (promise: promise_t<Fetch.Response.t>): promise_t<
     result_t<Fetch.response, string>,
   > => {
-    promise |> Js.Promise.then_(r =>
+    promise
+    |> Js.Promise.then_(r => {
       r |> Fetch.Response.ok || r |> Fetch.Response.status == 404
         ? Ok(r)->Js.Promise.resolve
         : Error("API call failed: " ++ Fetch.Response.statusText(r))->Js.Promise.resolve
-    )
+    })
+    |> Js.Promise.catch(err => {
+      Js.log2("APICallError", err)
+      "Network Error"->Error->Js.Promise.resolve
+    })
   }
 
   let extractJson = (promise: promise_t<result_t<Fetch.Response.t, string>>): promise_t<
@@ -53,14 +58,6 @@ module BsFetch: HTTPClient = {
         |> Js.Promise.catch(_ => Ok(None)->Js.Promise.resolve)
       | Error(e) => Error(e)->Js.Promise.resolve
       }
-    )
-  }
-
-  let raiseOnNok = (promise: promise_t<Fetch.Response.t>) => {
-    promise |> Js.Promise.then_(r =>
-      r |> Fetch.Response.ok || r |> Fetch.Response.status == 404
-        ? promise
-        : Js.Exn.raiseError(Fetch.Response.statusText(r))
     )
   }
 
@@ -189,9 +186,9 @@ module Hook = (CLIENT: HTTPClient) => {
     action() |> then_(resp =>
       switch resp {
       | Ok(mjson) =>
-          mjson
-          ->note("Missing expected JSON from the response!")
-          ->Result.flatMap(json => json->decode->deccoErrorToResponse)
+        mjson
+        ->note("Missing expected JSON from the response!")
+        ->Result.flatMap(json => json->decode->deccoErrorToResponse)
         ->responseToAction
         ->dispatch
         ->Ok
@@ -222,14 +219,14 @@ module Hook = (CLIENT: HTTPClient) => {
     state
   }
 
-  let usePost = (url: string, encoder: encoder_t<'a>, decoder: decoder_t<'b>): posthook_t<'a, 'b>
-  => {
+  let usePost = (url: string, encoder: encoder_t<'a>, decoder: decoder_t<'b>): posthook_t<
+    'a,
+    'b,
+  > => {
     let (state, setState) = React.useState(() => RemoteData.NotAsked)
     let set_state = s => setState(_prevState => s)
     let dispatch = data =>
-      post(url, data->encoder->Some, decoder, r =>
-        state->updateRemoteData(r)->set_state
-      )->ignore
+      post(url, data->encoder->Some, decoder, r => state->updateRemoteData(r)->set_state)->ignore
     (state, dispatch)
   }
 }
